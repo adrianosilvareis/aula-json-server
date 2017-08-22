@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <title>JSON-SERVER</title>
+    <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+
+    <script type="text/javascript">
+        angular.module("app", [])
+          .controller("testeCTRL", testeCTRL)
+
+        function testeCTRL($scope, $http){
+          $http.get("http://localhost:3003/lista")
+            .then( (success) => $scope.lista = success.data )
+            .catch( (error) => console.log(error) )
+        }
+
+    </script>
+  </head>
+  <body ng-controller="testeCTRL">
+    {{ lista }}
+
+    <ul>
+      <li ng-repeat="item in lista">{{ item }}</li>
+    </ul>
+
+  </body>
+</html>
